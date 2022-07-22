@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class ReactiveExample {
 
     public static final int VALOR_PERMITIDO = 15;
-    public static final double PUNTAJE_PARA_APROBAR = 75;
+    public static final double PUNTAJE_MINIMO = 75;
     private Flux<Estudiante> estudianteList;
 
     public ReactiveExample() {
@@ -83,7 +83,7 @@ public class ReactiveExample {
 
     //TODO: estudiantes aprovados
     public Flux<String> estudiantesAprobados() {
-        return estudianteList.filter(estudiante -> estudiante.getPuntaje() >= PUNTAJE_PARA_APROBAR)
+        return estudianteList.filter(estudiante -> estudiante.getPuntaje() >= PUNTAJE_MINIMO)
                 .doOnNext(estudiante -> estudiante.setAprobado(Boolean.TRUE))
                 .filter(Estudiante::isAprobado)
                 .map(Estudiante::getNombre);
